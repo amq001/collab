@@ -34,12 +34,12 @@ export const signup = async (req,res)=>{
         })
 
         if (newUser) {
-            const token = generateToken(newUser._id, res);
-            await newUser.save();
+            const savedUser = await newUser.save();
+            const token = generateToken(savedUser._id, res);
             return res.status(201).json({
-                _id: newUser._id,
-                fullname: newUser.fullname,
-                email: newUser.email,
+                _id: savedUser._id,
+                fullname: savedUser.fullname,
+                email: savedUser.email,
                 profilePic: newUser.profilePic
             });
             // todo: send welcome email
