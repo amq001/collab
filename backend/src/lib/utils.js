@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
+import { ENV } from "./env.js";
 
 export const generateToken = (userId, res) => {
-    const {JWT_SECRET,NODE_ENV} = process.env;
+    const {JWT_SECRET,NODE_ENV} = ENV;
     if (!JWT_SECRET) {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
@@ -14,6 +15,5 @@ export const generateToken = (userId, res) => {
         sameSite: "strict", // prevent the browser from sending this cookie along with cross-site requests - cross-site request forgery (CSRF) attacks
         secure: NODE_ENV === "production"
     });
-
     return token;
 }
