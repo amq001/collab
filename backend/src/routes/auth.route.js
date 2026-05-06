@@ -5,7 +5,7 @@ import { arcjetMiddleware } from '../middleware/arcjet.middleware.js';
 
 const router = express.Router();
 
-router.use(arcjetMiddleware)
+// router.use(arcjetMiddleware)
 
 router.post('/signup',signup)
 router.post('/login', login)
