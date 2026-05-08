@@ -65,6 +65,7 @@ export const sendMessage = async (req,res)=>{
         const {image,text} = req.body;
         const senderId = req.user._id;
         const receiverId = req.params.id;
+        
 
         if (!text && !image) {
             return res.status(400).json({ message: "Text or image is required." });
