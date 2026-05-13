@@ -46,12 +46,14 @@ export const getMessagesByUserId = async (req,res)=>{
     try {
         const myUserId = req.user._id;
         const otherUserId = req.params.id;
+
         const messages = await Message.find({
             $or: [
                 { senderId: myUserId, receiverId: otherUserId },
                 { senderId: otherUserId, receiverId: myUserId }
             ]
-        }).sort({ createdAt: 1 }); // Sort by creation time (oldest first)
+        });
+        
         res.status(200).json(messages);
     } catch (error) {
         console.log("Error in getMessagesByUserId", error);
@@ -59,6 +61,25 @@ export const getMessagesByUserId = async (req,res)=>{
     }
 
 }
+
+// export const getMessagesByUserId = async (req, res) => {
+//   try {
+//     const myId = req.user._id;
+//     const { id: userToChatId } = req.params;
+
+//     const messages = await Message.find({
+//       $or: [
+//         { senderId: myId, receiverId: userToChatId },
+//         { senderId: userToChatId, receiverId: myId },
+//       ],
+//     });
+
+//     res.status(200).json(messages);
+//   } catch (error) {
+//     console.log("Error in getMessages controller: ", error.message);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// };
 
 export const sendMessage = async (req,res)=>{
     try {
