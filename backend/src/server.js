@@ -13,7 +13,7 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
 // Middleware
-app.use(express.json());
+app.use(express.json({limit: '5mb'})); // To handle JSON payloads, especially for image data
 app.use(cors({
     origin: ENV.CLIENT_URL,
     credentials: true
