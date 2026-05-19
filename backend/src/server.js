@@ -6,9 +6,10 @@ import messageRoutes from './routes/message.route.js';
 import { connectDB } from './lib/db.js';
 import { ENV } from './lib/env.js';
 import cors from 'cors';
+import { app, server } from './lib/socket.js';
 
 // Initialize Express app
-const app = express();
+// const app = express();
 const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
@@ -32,7 +33,7 @@ if(ENV.NODE_ENV === 'production'){
 }
 
 // Start the server
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);
     connectDB();
 })
